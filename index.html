@@ -6,12 +6,17 @@
     <title>Mi Página Web</title>
     <style>
         .responsive-image {display: block;margin: 0 auto;max-width: 80%;height: auto;}
-        .c-naranja {background-color: #fcd1c6;padding: 10px;border-radius: 15px;}
-    	.c-gris {background-color: #E3E4E5;padding: 10px;border-radius: 15px;}
+        .c-naranja {background-color: #fcd1c6;padding: 10px;border-radius: 15px;
+      		max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
+    	.c-gris {background-color: #E3E4E5;padding: 10px;border-radius: 15px;
+        	max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
     </style>
+	<script>
+        function CargarImagen(url) {window.open(url, '_blank');}
+    </script>
 </head>
 <body>
-    <div class="c-gris"><h1>Datos de Potencia Activa</h1></div>
+    <div style="text-align: center;"><h1>Datos de Potencia Activa</h1></div>
   
     <div class="content">
       <div class="c-naranja">
@@ -24,10 +29,10 @@
     </div>
   
     <div class="c-gris">
-      <p>asdf</p>
+      <p>Texto de prueba</p>
     </div>
     
-  	<div class="c-gris">
+  	<div class="c-gris" onclick="CargarImagen('001-hd.jpg')" ondblclick="CargarImagen('001-hd.jpg')">
     	<img src="001.jpg" alt="Descripción de la imagen" class="responsive-image">
 	</div>
   
