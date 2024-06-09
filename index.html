@@ -10,10 +10,23 @@
       		max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
     	.c-gris {background-color: #E3E4E5;padding: 10px;border-radius: 15px;
         	max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
+	table {width: 100%;border-collapse: collapse;/*Para ver CSV*/}
+        th, td {border: 1px solid white;padding: 8px;text-align: left;Para ver CSV}
     </style>
 	<script>
-        function CargarImagen(url) {window.open(url, '_blank');}
-    </script>
+		function CargarImagen(url) {window.open(url, '_blank');}
+		function mostrarCSV(url) {fetch(url).then(response => response.text()).then(data => {
+                    const rows = data.split('\n').slice(0, 10);
+                    const table = document.createElement('table');
+			rows.forEach(row => {const tr = document.createElement('tr');
+			row.split(',').forEach(cell => {
+				const td = document.createElement('td');
+				td.textContent = cell;tr.appendChild(td);});table.appendChild(tr);});
+                    document.getElementById('csv-preview').appendChild(table);});}
+		function abrirCSV(url) {window.open(url, '_blank');}
+		document.addEventListener('DOMContentLoaded', () => {
+			mostrarCSV('Potencia Disponible-.csv'); // Coloca aquí la ruta de tu archivo CSV});
+	</script>
 </head>
 <body>
 	<div style="text-align: center;"><h1>Datos de Potencia Activa</h1></div>
@@ -87,6 +100,9 @@
 
 	<div class="c-gris" onclick="CargarImagen('Img/008-hd.jpg')" ondblclick="CargarImagen('Img/008-hd.jpg')">
 		<img src="Img/008.jpg" alt="Descripción de la imagen" class="responsive-image"></div>
+
+	<div class="c-gris" onclick="abrirCSV('Potencia Disponible-.csv')">
+        <div id="csv-preview"><!-- Aquí se mostrará la vista previa del CSV --></div></div>
 
 </body>
 </html>
