@@ -11,7 +11,7 @@
     	.c-gris {background-color: #E3E4E5;padding: 10px;border-radius: 15px;
         	max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
 	table {width: 100%;border-collapse: collapse;/*Para ver CSV*/}
-        th, td {border: 1px solid white;padding: 8px;text-align: left;Para ver CSV}
+        th, td {border: 1px solid white;padding: 8px;text-align: left;/*Para ver CSV*/}
     </style>
 	<script>
 		function CargarImagen(url) {window.open(url, '_blank');}
@@ -25,7 +25,9 @@
                     document.getElementById('csv-preview').appendChild(table);});}
 		function abrirCSV(url) {window.open(url, '_blank');}
 		document.addEventListener('DOMContentLoaded', () => {
-			mostrarCSV('Potencia Disponible-.csv'); // Coloca aquí la ruta de tu archivo CSV});
+			mostrarCSV('Potencia Disponible-.csv');// Coloca aquí la ruta de tu archivo CSV});
+		});
+
 	</script>
 </head>
 <body>
