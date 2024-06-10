@@ -26,7 +26,8 @@
 			row.split(',').forEach(cell => {
 				const td = document.createElement('td');
 				td.textContent = decodeURIComponent(escape(cell));tr.appendChild(td);});table.appendChild(tr);});
-                    document.getElementById('csv-preview').appendChild(table);});}
+			document.getElementById('csv-preview').innerHTML = ''; // Limpiar el contenido previo
+			document.getElementById('csv-preview').appendChild(table);});}
 		function abrirCSV(url) {window.open(url, '_blank');}
 		document.addEventListener('DOMContentLoaded', () => {
 			mostrarCSV('Potencia Disponible-.csv');// Coloca aquí la ruta de tu archivo CSV});
