@@ -12,6 +12,10 @@
         	max-width: 85%;margin: 0 auto 0 5%; /*S-D-Inf-Iz*/}
 	table {width: 100%;border-collapse: collapse;/*Para ver CSV*/}
         th, td {border: 1px solid white;padding: 8px;text-align: left;/*Para ver CSV*/}
+	/*Contenedor de dos botones a la derecha de la pagina*/
+        .button-container {display: flex;justify-content: flex-end;margin-top: 20px;}
+        .custom-button {justify-content: end;padding: 10px 10px;line-height: 20px;
+                        text-align: start;margin-left: 10px; /* Espacio entre botones */}
     </style>
 	<script>
 		function CargarImagen(url) {window.open(url, '_blank');}
@@ -31,11 +35,32 @@
 	</script>
 </head>
 <body>
+	<!-- Agrega dos botones superiores a la derecha con fecha y nuemero de visitas -->
+	<div class="button-container">
+		<button class="custom-button" id="Button1"><strong>Texto</strong></button>
+		<button class="custom-button" id="Button2">
+	            <strong>
+	                <a href="https://www.hitwebcounter.com" target="_blank">
+	                    <img src="https://hitwebcounter.com/counter/counter.php?page=14000561&style=0011&nbdigits=3&type=page&initCount=0" title="Counter Widget" alt="Visit counter For Websites" border="0" />
+	                </a></strong></button>
+	</div>
+	<script>
+	        function formatDate(date) {
+	            const day = String(date.getDate()).padStart(2, '0');
+	            const month = String(date.getMonth() + 1).padStart(2, '0');
+	            const year = date.getFullYear();
+	            const hours = String(date.getHours()).padStart(2, '0');
+	            const minutes = String(date.getMinutes()).padStart(2, '0');
+	            return `${day}/${month}/${year} ${hours}:${minutes}`;
+	        }
+	        const currentDate = formatDate(new Date());
+	        /*En Buttton1 se pone los datos de dd/mm/aaa hh:mm*/
+	        document.getElementById('Button1').querySelector('strong').textContent = currentDate;
+	</script>
+	<!-- Agrega dos botones superiores a la derecha con fecha y nuemero de visitas -->
+
+	
 	<div style="text-align: center;"><h1>Datos de Potencia Activa</h1></div>
-	<div class="c-gris" style="color: #FFFFFF; background-color: #808080;">
-		<p>Todos los datos utilizados en las gráficas siguientes
-		consideran únicamente los valores relacionados con la Unidad en servicio.</p>
-	</div><br>
 	<div class="content">
 		<div class="c-naranja">
 			<p>Se realizo un análisis visual de la potencia activa de la Unidad LMS100 para los años 2022, 
@@ -103,7 +128,13 @@
 	<div class="c-gris" onclick="CargarImagen('Img/008-hd.jpg')" ondblclick="CargarImagen('Img/008-hd.jpg')">
 		<img src="Img/008.jpg" alt="Descripción de la imagen" class="responsive-image"></div>
 
-	<div class="c-gris" onclick="abrirCSV('Potencia Disponible-.csv')">
+	<br>
+	<div class="c-gris" style="color: #FFFFFF; background-color: #808080;">
+	<p>Todos los datos utilizados en las gráficas siguientes
+	consideran únicamente los valores relacionados con la Unidad en servicio.</p>
+	</div><br>
+
+	<div class="c-gris">
         <div id="csv-preview"><!-- Aquí se mostrará la vista previa del CSV --></div></div>
 
 </body>
