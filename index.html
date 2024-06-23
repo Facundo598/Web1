@@ -35,6 +35,26 @@
 			mostrarCSV('Potencia Disponible-.csv');// Coloca aquí la ruta de tu archivo CSV});
 		});
 
+		function updateValue(sliderId) {
+			let slider = document.getElementById(sliderId);
+			let sliderValue = parseFloat(slider.value);
+			if (sliderId === 'sliderTAmb') {document.getElementById('TAmbValue').textContent = sliderValue.toFixed(1);}
+			else if (sliderId === 'sliderHAmb'){document.getElementById('HAmbValue').textContent = sliderValue;} 
+		
+		        let HAmbValue = parseFloat(document.getElementById('sliderHAmb').value);
+		        let TAmbValue = parseFloat(document.getElementById('sliderTAmb').value);
+		          
+			let ResultadoT2 = 0.8 * TAmbValue + 0.2 * HAmbValue - 9.85;
+			ResultadoT2 = ResultadoT2.toFixed(1);
+			
+			let ResultadoPActiva = 0.55 * ResultadoT2 - 0.03 * (ResultadoT2 ** 2) + 90.29;
+			ResultadoPActiva = ResultadoPActiva.toFixed(1);
+			
+			document.getElementById('ResultadoT2').textContent = ResultadoT2;
+        		document.getElementById('ResultadoPActiva').textContent = ResultadoPActiva;}
+			window.onload = function() {
+				updateValue('sliderTAmb');
+				updateValue('sliderHAmb');}
 	</script>
 </head>
 <body>
@@ -145,8 +165,34 @@
 		<ul><b>T2 [°F] = 0.8 * Tamb [°F] + 0.2 * Hamb [%] - 9.85</b></ul>
 		<ul><b>T2 [°C] = 0.8 * (Tamb [°C] - 32) * 5/9 + 0.19 * Hamb - 9.85</b></ul>
 	</div><br>
-
-
+	
+	<div class="c-gris" style="text-align: center;">
+		<p style="font-weight: bold; font-size: 18px;">Calculo Potencia</p>
+		<p style="text-align: justify;">La correlación entre los datos de potencia y la 
+			temperatura T2 desde octubre de 2022 hasta abril de 2024 indica una relación del 45%. 
+			Esto se debe a que, aunque T2 es un buen indicador de la potencia estimada, en la 
+		      	trayectoria del flujo de aire se encuentran las variables geométricas VBV1 y VBV2, 
+		      	que influyen en la potencia. Estas variables afectan la potencia porque reducen el 
+		      	flujo y la presión del aire de combustión<br>A continuación, la expresión que 
+		      	relaciona estas dos variables:</p>
+		<ul><b> Potencia Activa [MW] = 0.55 * T2 [°C] - 0.03 * T2[°C]^2 + 90.29</b></ul>
+		<p>Temperatura ambiente [°C] = 5° Mínimo  - 43° Máximo <br>
+			Humedad ambiente [%] = 5% Mínimo - 75%Máximo</p>
+		
+		<div style="display: inline-block;">
+			<p style="text-align: center;">T.Amb [°C] = <span id="TAmbValue">5.0</span></p>
+			<input type="range" id="sliderTAmb" min="5.0" max="43" step="0.1" value="5.0" oninput="updateValue('sliderTAmb')">
+		</div>
+		<span>&nbsp;&nbsp;</span>
+		<div style="display: inline-block;">
+			<p style="text-align: center;">H.Amb [%] = <span id="HAmbValue">5</span></p>
+			<input type="range" id="sliderHAmb" min="5" max="75" value="5" oninput="updateValue('sliderHAmb')">
+		</div>
+		<h2 style="text-align: center;">
+			T2 [°C] = <span id="ResultadoT2">1.40</span></h2>
+		<h2 style="text-align: center;">
+			Potencia [MW] = <span id="ResultadoPActiva">1.400</span></h2>
+	</div>
 	
 
 </body>
