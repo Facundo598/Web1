@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro de Datos</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+h1{
+    text-align:center;
+}
+
+.formulario{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap:10px;
+    margin-bottom:20px;
+}
+
+input, select, button{
+    padding:10px;
+    font-size:16px;
+}
+
+button{
+    cursor:pointer;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:20px;
+}
+
+th, td{
+    border:1px solid #ccc;
+    padding:8px;
+    text-align:left;
+}
+
+th{
+    background:#f0f0f0;
+}
+
+.copiar-btn{
+    background:#4CAF50;
+    color:white;
+    border:none;
+    padding:6px 12px;
+}
+
+.copiar-btn:hover{
+    background:#45a049;
+}
+</style>
+</head>
+<body>
+
+<h1>Registro de Personas</h1>
+
+<div class="formulario">
+    <input type="text" id="nombre" placeholder="Nombre">
+    <input type="text" id="dni" placeholder="DNI">
+    <input type="text" id="apodo" placeholder="Apodo">
+    <input type="number" id="anio" placeholder="Año">
+
+    <select id="opcion">
+        <option value="">Seleccione una opción</option>
+        <option>Opción A</option>
+        <option>Opción B</option>
+        <option>Opción C</option>
+    </select>
+
+    <button onclick="agregarFila()">Agregar</button>
+</div>
+
+<table id="tabla">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>DNI</th>
+            <th>Apodo</th>
+            <th>Año</th>
+            <th>Opción</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+function agregarFila() {
+
+    const nombre = document.getElementById("nombre").value.trim();
+    const dni = document.getElementById("dni").value.trim();
+    const apodo = document.getElementById("apodo").value.trim();
+    const anio = document.getElementById("anio").value.trim();
+    const opcion = document.getElementById("opcion").value;
+
+    if(!nombre || !dni || !apodo || !anio || !opcion){
+        alert("Complete todos los campos");
+        return;
+    }
+
+    const tbody = document.querySelector("#tabla tbody");
+
+    const fila = tbody.insertRow();
+
+    fila.insertCell().textContent = nombre;
+    fila.insertCell().textContent = dni;
+    fila.insertCell().textContent = apodo;
+    fila.insertCell().textContent = anio;
+    fila.insertCell().textContent = opcion;
+
+    const celdaBoton = fila.insertCell();
+
+    const boton = document.createElement("button");
+    boton.textContent = "Copiar";
+    boton.className = "copiar-btn";
+
+    boton.onclick = () => {
+        const texto =
+`Nombre: ${nombre}
+DNI: ${dni}
+Apodo: ${apodo}
+Año: ${anio}
+Opción: ${opcion}`;
+
+        navigator.clipboard.writeText(texto)
+            .then(() => alert("Datos copiados"));
+    };
+
+    celdaBoton.appendChild(boton);
+
+    document.getElementById("nombre").value = "";
+    document.getElementById("dni").value = "";
+    document.getElementById("apodo").value = "";
+    document.getElementById("anio").value = "";
+    document.getElementById("opcion").selectedIndex = 0;
+
+    document.getElementById("nombre").focus();
+}
+</script>
+
+</body>
+</html>
