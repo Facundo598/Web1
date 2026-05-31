@@ -123,20 +123,20 @@ function agregarFila() {
     const celdaBoton = fila.insertCell();
 
     const boton = document.createElement("button");
-    boton.textContent = "Copiar";
+    boton.textContent = "Guardar";
     boton.className = "copiar-btn";
-
     boton.onclick = () => {
-        const texto =
-`Nombre: ${nombre}
-DNI: ${dni}
-Apodo: ${apodo}
-Año: ${anio}
-Opción: ${opcion}`;
+        const datos = {
+            nombre: nombre,
+            dni: dni,
+            apodo: apodo,
+            anio: anio,
+            opcion: opcion};
+        localStorage.setItem(
+            "datosPaciente",
+            JSON.stringify(datos));
+        alert("Datos guardados");};
 
-        navigator.clipboard.writeText(texto)
-            .then(() => alert("Datos copiados"));
-    };
 
     celdaBoton.appendChild(boton);
 
